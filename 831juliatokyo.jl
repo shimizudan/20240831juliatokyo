@@ -42,13 +42,27 @@ md"""
 
 ### $n=3$のうどん
 
+![](https://shimizudan.github.io/20240831juliatokyo/n3.jpg)
+
 ### $n=4$のうどん
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/n4.jpg)
+
 
 ### $n=5$のうどん
 
+
+![](https://shimizudan.github.io/20240831juliatokyo/n5.png)
+
+
 ### $n=6$のうどん
 
-### まとめ
+
+![](https://shimizudan.github.io/20240831juliatokyo/n6.png)
+
+
+### 予想
 
 　$n=1$の場合からスタートすると，
 
@@ -62,7 +76,7 @@ $$1,1,2,5,14,42,...$$
 # ╔═╡ 922cae3f-67e5-48d6-88f8-9b5900bd6b5d
 md"""
 
-### 生徒が利用する端末（BYOD）
+## Julia のコード
 
 >- MacBook
 >- iPad
@@ -1650,7 +1664,7 @@ version = "1.4.1+1"
 # ╠═866207ab-db72-4220-b1c7-9b73d0ac91e8
 # ╟─8acc204e-896e-11ed-1251-438ce5d793cb
 # ╠═cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
-# ╟─922cae3f-67e5-48d6-88f8-9b5900bd6b5d
+# ╠═922cae3f-67e5-48d6-88f8-9b5900bd6b5d
 # ╟─6205b1fc-ec3a-4b7b-b690-851f151ada1e
 # ╠═f200053f-f7ff-45d1-90b8-2bc6689e8340
 # ╟─1a7b643e-99d2-4720-986b-e8dbb359f36a
