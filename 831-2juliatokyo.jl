@@ -17,43 +17,66 @@ using Combinatorics
 md"""
 # はじめに
 
-> ![](https://shimizudan.github.io/20240203juliatokyo/pic16.png)
+> ![](https://shimizudan.github.io/20240831juliatokyo/shimizu.png)
 
-> - 2024年8月31日　JuliaTokyo #12　清水　団（清水・だん）　[@dannchu](https://twitter.com/dannchu)
-> - 東京都　板橋区城北中学校・高等学校に勤務（数学科・教頭）
 """
 
 # ╔═╡ fcbaf6f4-5f24-448d-937b-58374362c18a
 md"""
-## 最近の取り組み（2024/6/~)
+## 最近の取り組み
 
-**「数学を考えるときにJulia言語を使うととてもいい感じ！」**をキャッチフレーズに，主にXなどで発信・情報交換をしています。
+**「数学を考えるときにJulia言語を使うととてもいい感じ！」**をキャッチフレーズに，主にXなどで発信・情報交換をしています。今日はその中から4つ紹介します。
 
-今日はその中から4つ紹介します。
-
-> - 土日の鈴木伸介さんとの交流
-> - 合法うどん決定トーナメント
-> - 高校数学の統計について
-> - Zenn Booksの紹介
+> - **鈴木伸介さんとの交流**
+> - **合法うどん決定トーナメント**
+> - **高校数学の統計について**
+> - **Zenn Booksの紹介**
 
 """
 
 # ╔═╡ f54dbff1-c1ab-47a2-bead-1484c97ecae3
 md"""
 
-# 土日の鈴木伸介さんとの交流
+# 鈴木伸介さんとの交流
 
 X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を出してくれます。なんとなく，julia言語使って解くことが習慣になってしまいました。いくつかやりとりを紹介します。
-
 
 ![](https://shimizudan.github.io/20240831juliatokyo/suzuki.png)
 
 
 ## 2024年4月28日
 
+![](https://shimizudan.github.io/20240831juliatokyo/428m.png)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/428.png)
 
 
 """
+
+# ╔═╡ 7a57522b-c172-48fc-b9f7-627af0894508
+let
+
+x = 1
+while x < 1000 #まあ1000くらいまでで大丈夫かな。
+    k = 0
+    for j = x:x+10
+        if j |> iseven 
+            k += j
+        else k -= j
+        end
+    end
+    if k == 19
+        println("$(x)〜$(x+10)の11個の自然数。最大の自然数は$(x+10)")
+        break
+    end
+    x += 1
+end
+
+end
+
+# ╔═╡ a0e71c8c-9b5e-4406-ac51-9d43bd71ab75
+
 
 # ╔═╡ cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
 md"""
@@ -599,6 +622,8 @@ version = "17.4.0+2"
 # ╠═866207ab-db72-4220-b1c7-9b73d0ac91e8
 # ╠═fcbaf6f4-5f24-448d-937b-58374362c18a
 # ╠═f54dbff1-c1ab-47a2-bead-1484c97ecae3
+# ╠═7a57522b-c172-48fc-b9f7-627af0894508
+# ╠═a0e71c8c-9b5e-4406-ac51-9d43bd71ab75
 # ╠═cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
 # ╟─922cae3f-67e5-48d6-88f8-9b5900bd6b5d
 # ╟─6205b1fc-ec3a-4b7b-b690-851f151ada1e
