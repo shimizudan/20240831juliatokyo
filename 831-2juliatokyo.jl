@@ -21,15 +21,43 @@ html"<button onclick='present()'>present</button>"
 
 # ╔═╡ 866207ab-db72-4220-b1c7-9b73d0ac91e8
 md"""
-# 合法うどん決定トーナメントJulia版
+# 高校数学とjulia
 
-![](https://shimizudan.github.io/20240203juliatokyo/pic16.png)
+> ![](https://shimizudan.github.io/20240203juliatokyo/pic16.png)
 
-- 2024年8月31日　JuliaTokyo #12　　清水　団（清水・だん）　[@dannchu](https://twitter.com/dannchu)
+> - 2024年8月31日　JuliaTokyo #12　清水　団（清水・だん）　[@dannchu](https://twitter.com/dannchu)
+> - 東京都板橋区 城北中学校・高等学校 に数学科の教員として勤務。教頭です。
+> - 本日の内容は [https://shimizudan.github.io/20240831juliatokyo/](https://shimizudan.github.io/20240831juliatokyo/)に公開してあります。
 
-- 東京都板橋区 城北中学校・高等学校 に数学科の教員として勤務。教頭です。
+"""
 
-- 本日の内容は [https://shimizudan.github.io/20240831juliatokyo/](https://shimizudan.github.io/20240831juliatokyo/)に公開してあります。
+# ╔═╡ fcbaf6f4-5f24-448d-937b-58374362c18a
+md"""
+## 最近の取り組み（2024/6/~)
+
+高校数学を中心に，**「数学を考えるときにJulia言語を使うととてもいい感じ！」**をキャッチフレーズに，Xなどで発信・情報交換を主にしています。
+
+今日はその中から4つ紹介します。
+
+> - 土日の鈴木伸介さんとの交流
+> - 合法うどん決定トーナメント
+> - 高校数学の統計について
+> - Zenn Booksの紹介
+
+"""
+
+# ╔═╡ f54dbff1-c1ab-47a2-bead-1484c97ecae3
+md"""
+
+## 土日の鈴木伸介さんとの交流
+
+
+
+X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を出してくれます。なんとなく，julia言語使って解くことが習慣になってしまいました。いくつかやりとりを紹介します。
+
+### 2024年4月28日
+
+
 
 """
 
@@ -305,7 +333,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "9bc2b48327cf1821835d83c131e89a2c3b1c4cc0"
+project_hash = "d614eb60b6f45451e57096762681784f08c8746a"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -574,9 +602,11 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─be2c12b2-bd64-422d-97c7-1349c9149898
-# ╟─866207ab-db72-4220-b1c7-9b73d0ac91e8
-# ╠═8acc204e-896e-11ed-1251-438ce5d793cb
-# ╟─cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
+# ╠═866207ab-db72-4220-b1c7-9b73d0ac91e8
+# ╟─8acc204e-896e-11ed-1251-438ce5d793cb
+# ╠═fcbaf6f4-5f24-448d-937b-58374362c18a
+# ╠═f54dbff1-c1ab-47a2-bead-1484c97ecae3
+# ╠═cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
 # ╟─922cae3f-67e5-48d6-88f8-9b5900bd6b5d
 # ╟─6205b1fc-ec3a-4b7b-b690-851f151ada1e
 # ╠═945e3c37-3442-4810-809e-97571b3e3939
