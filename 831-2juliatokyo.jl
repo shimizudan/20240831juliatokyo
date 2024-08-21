@@ -75,6 +75,32 @@ end
 
 end
 
+# ╔═╡ 1c20fb8c-5cd2-4c2d-8e42-7125001bfff1
+md"""
+
+## 2024年7月7日
+
+![](https://shimizudan.github.io/20240831juliatokyo/707m.png)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/707.png)
+
+
+"""
+
+# ╔═╡ 2d3aeaab-c3ab-48b8-87af-031634b60c5d
+md"""
+
+## 2024年8月4日
+
+![](https://shimizudan.github.io/20240831juliatokyo/804m.png)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/804.png)
+
+
+"""
+
 # ╔═╡ a0e71c8c-9b5e-4406-ac51-9d43bd71ab75
 md"""
 
@@ -90,9 +116,6 @@ md"""
 
 # ╔═╡ 9b6bc15e-ffe8-4f30-bdaf-910293f2e181
 [(x,y) for x = 1:33 , y = 1:14 if 3x+7y == 100]
-
-# ╔═╡ b0470615-6797-44e8-aebb-74a87aa4cac6
-
 
 # ╔═╡ cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
 md"""
@@ -639,9 +662,10 @@ version = "17.4.0+2"
 # ╠═fcbaf6f4-5f24-448d-937b-58374362c18a
 # ╠═f54dbff1-c1ab-47a2-bead-1484c97ecae3
 # ╠═7a57522b-c172-48fc-b9f7-627af0894508
+# ╠═1c20fb8c-5cd2-4c2d-8e42-7125001bfff1
+# ╠═2d3aeaab-c3ab-48b8-87af-031634b60c5d
 # ╠═a0e71c8c-9b5e-4406-ac51-9d43bd71ab75
 # ╠═9b6bc15e-ffe8-4f30-bdaf-910293f2e181
-# ╠═b0470615-6797-44e8-aebb-74a87aa4cac6
 # ╠═cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
 # ╟─922cae3f-67e5-48d6-88f8-9b5900bd6b5d
 # ╟─6205b1fc-ec3a-4b7b-b690-851f151ada1e
