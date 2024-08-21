@@ -10,6 +10,23 @@ using PlutoUI
 TableOfContents(title="高校数学とjulia")
 end
 
+# ╔═╡ 40c7a0df-dbc1-4703-baeb-c1854669f195
+let
+
+	#みかん1個✕円、りんご1個y円
+	#Aさんの所持金は30x＝18y 円
+	#りんごをn個買うと、みかんは24-n個
+	# 30x=（24-n） x+n30x/18
+	#n + (24-n) *30/18 -30 =0
+		
+	using SimplePolynomials
+	n = getx()
+	N = roots(n*30/18+(24-n)-30)[1] |> Int64
+	println("りんごは$(N)個")
+
+end
+
+
 # ╔═╡ f176d67e-bb13-43c7-8557-9b005945f4f9
 using Combinatorics
 
@@ -56,22 +73,22 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 
 # ╔═╡ 7a57522b-c172-48fc-b9f7-627af0894508
 let
-#2024/4/28
-x = 1
-while x < 1000 #まあ1000くらいまでで大丈夫かな。
-    k = 0
-    for j = x:x+10
-        if j |> iseven 
-            k += j
-        else k -= j
-        end
-    end
-    if k == 19
-        println("$(x)〜$(x+10)の11個の自然数。最大の自然数は$(x+10)")
-        break
-    end
-    x += 1
-end
+	#2024/4/28
+	x = 1
+	while x < 1000 #まあ1000くらいまでで大丈夫かな。
+	    k = 0
+	    for j = x:x+10
+	        if j |> iseven 
+	            k += j
+	        else k -= j
+	        end
+	    end
+	    if k == 19
+	        println("$(x)〜$(x+10)の11個の自然数。最大の自然数は$(x+10)")
+	        break
+	    end
+	    x += 1
+	end
 
 end
 
@@ -87,6 +104,11 @@ md"""
 
 
 """
+
+# ╔═╡ 1da84535-b41e-4f8e-886a-38581fcaab9b
+let
+	lcm(21,15)//gcd(104,182)
+end
 
 # ╔═╡ 2d3aeaab-c3ab-48b8-87af-031634b60c5d
 md"""
@@ -115,12 +137,14 @@ md"""
 """
 
 # ╔═╡ 9b6bc15e-ffe8-4f30-bdaf-910293f2e181
-[(x,y) for x = 1:33 , y = 1:14 if 3x+7y == 100]
+let
+	[(x,y) for x = 1:33 , y = 1:14 if 3x+7y == 100]
+end
 
 # ╔═╡ cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
 md"""
 
-## 合法うどん決定トーナメントとは
+# 合法うどん決定トーナメント
 
 「合法うどん決定トーナメント」とは数学コミュニティー「数学デー」の中で話題となり，2024/8/1にポストされました。
 
@@ -130,29 +154,29 @@ md"""
 ![](https://shimizudan.github.io/20240831juliatokyo/1.jpeg)
 
 
-### $n=3$のうどん
+## n=3のうどん
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n3.jpg)
 
-### $n=4$のうどん
+## n=4のうどん
 
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n4.jpg)
 
 
-### $n=5$のうどん
+## n=5のうどん
 
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n5.png)
 
 
-### $n=6$のうどん
+## n=6のうどん
 
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n6.png)
 
 
-### カタラン数？
+## カタラン数？
 
 - 数の並びは$1,1,2,5,14,42,...$となり，これはカタラン数ですね，
 - [@aoki_taichi](https://x.com/aoki_taichi)さんのXへの投稿を参考にしました。
@@ -167,7 +191,6 @@ md"""
 md"""
 
 ## Julia のコード
-### 目標
 
 >- カタラン数のリストからうどんの配置パターンを作成
 >- 逆に配置パターンからカタラン数のリストを決定する
@@ -177,7 +200,7 @@ md"""
 # ╔═╡ 6205b1fc-ec3a-4b7b-b690-851f151ada1e
 md"""
 
-### soi関数
+## soi関数
 
 - うどんを合成する関数です。
 
@@ -209,7 +232,7 @@ soi([1,2,3],[4])
 
 # ╔═╡ f200053f-f7ff-45d1-90b8-2bc6689e8340
 md"""
-### カタラン数のリストチェック
+## カタラン数のリストチェック
 - 1と2が同数あるリストを用いて，左端からどの番まででも（1の個数）≧（2の個数）となっているかチェックします。
 
 """
@@ -248,7 +271,7 @@ catalan_check([1,2,2,1,2,1,1,2])
 # ╔═╡ 1a7b643e-99d2-4720-986b-e8dbb359f36a
 md"""
 
-### カタラン数のリスト作成
+## カタラン数のリスト作成
 - 1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック
 - 総数はカタラン数C(n+1)である
 - `Combinatorics.jl`を利用します。
@@ -279,7 +302,7 @@ catalan_list(4)
 # ╔═╡ 2aeb36da-85f9-4e7c-affd-5d9bc30628d3
 md"""
 
-### うどんの配列作成（soi_seq関数）
+## うどんの配列作成（soi_seq関数）
 - カタラン数のリストからsoi関数で変換します。
 
 
@@ -317,7 +340,7 @@ end
 # ╔═╡ 28052d2d-a97b-4fb2-b5a5-3132e19a19c0
 md"""
 
-###  soi_seqの逆関数
+##  soi_seqの逆関数
 
 - 結局，アルゴリズムはよくわからなかったです。
 
@@ -364,10 +387,28 @@ inverse_soi_seq([2,1,3,4,5,6])
 # ╔═╡ 13dff097-eaed-4207-8aeb-12f667dc8bba
 md"""
 
-## まとめ・謝辞
+# 高校数学の統計について
 
-- コード作成に`ChatGPT-4o`におせわになりました。
-- カタラン数はいろんなところに出てきますね。
+大澤さんとは統計の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです。。。）今回は，大澤さんからの問題を少し発展させて考えた経過をご紹介します。
+
+
+"""
+
+# ╔═╡ ef201ffb-5af5-4a5d-9c29-02d27ffcdd7b
+md"""
+
+# Zenn Booksの紹介
+
+私自身，勤務校で数学を担当していますが，「Julia言語使って数学の問題を考えるとどうなるのだろう？」ということに関心があります。高校数学の「場合の数」「確率」という分野の定期テストの問題を題材にJulia言語を用いて考えてみました。体感ですが，「julia言語を用いて数学の問題を考えると，考え方が拡張され，自由になる」と感じました。この2つの「Zenn Books」にまとめました。少しご紹介します。
+
+
+[https://zenn.dev/dannchu/books/f2fe475efb35dd]
+(https://zenn.dev/dannchu/books/f2fe475efb35dd)
+![]()
+
+
+
+[https://zenn.dev/dannchu/books/19354174fa5f25](https://zenn.dev/dannchu/books/19354174fa5f25)
 
 
 """
@@ -377,10 +418,12 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+SimplePolynomials = "cc47b68c-3164-5771-a705-2bc0097375a0"
 
 [compat]
 Combinatorics = "~1.0.2"
 PlutoUI = "~0.7.59"
+SimplePolynomials = "~0.2.17"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -389,7 +432,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "d614eb60b6f45451e57096762681784f08c8746a"
+project_hash = "92272630e867b1821d74684ea71aeb25ddc66623"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -423,6 +466,20 @@ deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 version = "1.1.1+0"
 
+[[deps.ConstructionBase]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "a33b7ced222c6165f624a3f2b55945fac5a598d9"
+uuid = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
+version = "1.5.7"
+
+    [deps.ConstructionBase.extensions]
+    ConstructionBaseIntervalSetsExt = "IntervalSets"
+    ConstructionBaseStaticArraysExt = "StaticArrays"
+
+    [deps.ConstructionBase.weakdeps]
+    IntervalSets = "8197267c-284f-5f27-9208-e0e47529a953"
+    StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
@@ -441,6 +498,10 @@ git-tree-sha1 = "05882d6995ae5c12bb5f36dd2ed3f61c98cbb172"
 uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
 version = "0.8.5"
 
+[[deps.Future]]
+deps = ["Random"]
+uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
+
 [[deps.Hyperscript]]
 deps = ["Test"]
 git-tree-sha1 = "179267cfa5e712760cd43dcae385d7ea90cc25a4"
@@ -458,6 +519,11 @@ deps = ["Logging", "Random"]
 git-tree-sha1 = "b6d6bfdd7ce25b0f9b2f6b3dd56b2673a66c8770"
 uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
 version = "0.2.5"
+
+[[deps.IntegerMathUtils]]
+git-tree-sha1 = "b8ffb903da9f7b8cf695a8bead8e01814aa24b30"
+uuid = "18e54dd8-cb9d-406c-a71d-865a43cbb235"
+version = "0.1.2"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
@@ -508,6 +574,12 @@ git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
 uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
 version = "0.1.4"
 
+[[deps.MacroTools]]
+deps = ["Markdown", "Random"]
+git-tree-sha1 = "2fa9ee3e63fd3a4f7a9a4f4744a52f4856de82df"
+uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+version = "0.5.13"
+
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -520,9 +592,19 @@ version = "2.28.2+1"
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
+[[deps.Mods]]
+git-tree-sha1 = "924f962b524a71eef7a21dae1e6853817f9b658f"
+uuid = "7475f97c-0381-53b1-977b-4c60186c8d62"
+version = "2.2.4"
+
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
 version = "2023.1.10"
+
+[[deps.Multisets]]
+git-tree-sha1 = "8d852646862c96e226367ad10c8af56099b4047e"
+uuid = "3b2b4ff1-bcff-5658-a3ee-dbcf1ce5ac09"
+version = "0.4.4"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
@@ -550,6 +632,24 @@ git-tree-sha1 = "ab55ee1510ad2af0ff674dbcced5e94921f867a9"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.59"
 
+[[deps.Polynomials]]
+deps = ["LinearAlgebra", "RecipesBase", "Requires", "Setfield", "SparseArrays"]
+git-tree-sha1 = "1a9cfb2dc2c2f1bd63f1906d72af39a79b49b736"
+uuid = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
+version = "4.0.11"
+
+    [deps.Polynomials.extensions]
+    PolynomialsChainRulesCoreExt = "ChainRulesCore"
+    PolynomialsFFTWExt = "FFTW"
+    PolynomialsMakieCoreExt = "MakieCore"
+    PolynomialsMutableArithmeticsExt = "MutableArithmetics"
+
+    [deps.Polynomials.weakdeps]
+    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+    FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
+    MakieCore = "20f20a25-4f0e-4fdf-b5d1-57303727442b"
+    MutableArithmetics = "d8a4904e-b15c-11e9-3269-09a3773c0cb0"
+
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
 git-tree-sha1 = "5aa36f7049a63a1528fe8f7c3f2113413ffd4e1f"
@@ -561,6 +661,12 @@ deps = ["TOML"]
 git-tree-sha1 = "9306f6085165d270f7e3db02af26a400d580f5c6"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.4.3"
+
+[[deps.Primes]]
+deps = ["IntegerMathUtils"]
+git-tree-sha1 = "cb420f77dc474d23ee47ca8d14c90810cafe69e7"
+uuid = "27ebfcd6-29c5-5fa9-bf4b-fb8fc14df3ae"
+version = "0.5.6"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -574,10 +680,22 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
+[[deps.RecipesBase]]
+deps = ["PrecompileTools"]
+git-tree-sha1 = "5c3d09cc4f31f5fc6af001c250bf1278733100ff"
+uuid = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
+version = "1.3.4"
+
 [[deps.Reexport]]
 git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
 uuid = "189a3867-3050-52da-a836-e630ba90ab69"
 version = "1.2.2"
+
+[[deps.Requires]]
+deps = ["UUIDs"]
+git-tree-sha1 = "838a3a4188e2ded87a4f9f184b4b0d78a1e91cb7"
+uuid = "ae029012-a4dd-5104-9daa-d747884805df"
+version = "1.3.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
@@ -586,6 +704,18 @@ version = "0.7.0"
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
+[[deps.Setfield]]
+deps = ["ConstructionBase", "Future", "MacroTools", "StaticArraysCore"]
+git-tree-sha1 = "e2cc6d8c88613c05e1defb55170bf5ff211fbeac"
+uuid = "efcf1570-3423-57d1-acb7-fd33fddbac46"
+version = "1.1.1"
+
+[[deps.SimplePolynomials]]
+deps = ["Mods", "Multisets", "Polynomials", "Primes"]
+git-tree-sha1 = "7063828369cafa93f3187b3d0159f05582011405"
+uuid = "cc47b68c-3164-5771-a705-2bc0097375a0"
+version = "0.2.17"
+
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
@@ -593,6 +723,11 @@ uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 version = "1.10.0"
+
+[[deps.StaticArraysCore]]
+git-tree-sha1 = "192954ef1208c7019899fbf8049e717f92959682"
+uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
+version = "1.4.3"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -657,17 +792,19 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═8acc204e-896e-11ed-1251-438ce5d793cb
-# ╠═866207ab-db72-4220-b1c7-9b73d0ac91e8
-# ╠═fcbaf6f4-5f24-448d-937b-58374362c18a
-# ╠═f54dbff1-c1ab-47a2-bead-1484c97ecae3
+# ╟─8acc204e-896e-11ed-1251-438ce5d793cb
+# ╟─866207ab-db72-4220-b1c7-9b73d0ac91e8
+# ╟─fcbaf6f4-5f24-448d-937b-58374362c18a
+# ╟─f54dbff1-c1ab-47a2-bead-1484c97ecae3
 # ╠═7a57522b-c172-48fc-b9f7-627af0894508
-# ╠═1c20fb8c-5cd2-4c2d-8e42-7125001bfff1
-# ╠═2d3aeaab-c3ab-48b8-87af-031634b60c5d
-# ╠═a0e71c8c-9b5e-4406-ac51-9d43bd71ab75
+# ╟─1c20fb8c-5cd2-4c2d-8e42-7125001bfff1
+# ╠═1da84535-b41e-4f8e-886a-38581fcaab9b
+# ╟─2d3aeaab-c3ab-48b8-87af-031634b60c5d
+# ╠═40c7a0df-dbc1-4703-baeb-c1854669f195
+# ╟─a0e71c8c-9b5e-4406-ac51-9d43bd71ab75
 # ╠═9b6bc15e-ffe8-4f30-bdaf-910293f2e181
 # ╠═cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
-# ╟─922cae3f-67e5-48d6-88f8-9b5900bd6b5d
+# ╠═922cae3f-67e5-48d6-88f8-9b5900bd6b5d
 # ╟─6205b1fc-ec3a-4b7b-b690-851f151ada1e
 # ╠═945e3c37-3442-4810-809e-97571b3e3939
 # ╠═ff4ac6f3-c4db-44ff-bd02-32a02996d60c
@@ -687,12 +824,13 @@ version = "17.4.0+2"
 # ╟─2aeb36da-85f9-4e7c-affd-5d9bc30628d3
 # ╠═d6844c95-210e-45d9-a133-e1f60f9c67ff
 # ╠═3a42f6f8-0624-4c29-842f-e62b30181d48
-# ╟─28052d2d-a97b-4fb2-b5a5-3132e19a19c0
+# ╠═28052d2d-a97b-4fb2-b5a5-3132e19a19c0
 # ╠═5108e109-4751-4a31-94c6-3bb171f585d8
 # ╠═e8e30cca-d17f-4914-b301-725ed65e6105
 # ╠═08291e92-0e86-440d-8253-89bf45c3fb94
 # ╠═fa99bdb6-4853-49f6-be68-20e6ceb4cf39
 # ╠═4bd19da1-ddd1-4ae5-b5b4-f722bc4c7b74
-# ╟─13dff097-eaed-4207-8aeb-12f667dc8bba
+# ╠═13dff097-eaed-4207-8aeb-12f667dc8bba
+# ╠═ef201ffb-5af5-4a5d-9c29-02d27ffcdd7b
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
