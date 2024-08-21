@@ -6,36 +6,28 @@ using InteractiveUtils
 
 # ╔═╡ 8acc204e-896e-11ed-1251-438ce5d793cb
 begin
-
 using PlutoUI
-
-TableOfContents(title="もくじ 📚")
-
+TableOfContents(title="高校数学とjulia")
 end
 
 # ╔═╡ f176d67e-bb13-43c7-8557-9b005945f4f9
 using Combinatorics
 
-# ╔═╡ be2c12b2-bd64-422d-97c7-1349c9149898
-html"<button onclick='present()'>present</button>"
-
 # ╔═╡ 866207ab-db72-4220-b1c7-9b73d0ac91e8
 md"""
-# 高校数学とjulia
+# はじめに
 
 > ![](https://shimizudan.github.io/20240203juliatokyo/pic16.png)
 
 > - 2024年8月31日　JuliaTokyo #12　清水　団（清水・だん）　[@dannchu](https://twitter.com/dannchu)
-> - 東京都板橋区 城北中学校・高等学校 に数学科の教員として勤務。教頭です。
-> - 本日の内容は [https://shimizudan.github.io/20240831juliatokyo/](https://shimizudan.github.io/20240831juliatokyo/)に公開してあります。
-
+> - 東京都　板橋区城北中学校・高等学校に勤務（数学科・教頭）
 """
 
 # ╔═╡ fcbaf6f4-5f24-448d-937b-58374362c18a
 md"""
 ## 最近の取り組み（2024/6/~)
 
-高校数学を中心に，**「数学を考えるときにJulia言語を使うととてもいい感じ！」**をキャッチフレーズに，Xなどで発信・情報交換を主にしています。
+**「数学を考えるときにJulia言語を使うととてもいい感じ！」**をキャッチフレーズに，主にXなどで発信・情報交換をしています。
 
 今日はその中から4つ紹介します。
 
@@ -49,13 +41,15 @@ md"""
 # ╔═╡ f54dbff1-c1ab-47a2-bead-1484c97ecae3
 md"""
 
-## 土日の鈴木伸介さんとの交流
-
-
+# 土日の鈴木伸介さんとの交流
 
 X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を出してくれます。なんとなく，julia言語使って解くことが習慣になってしまいました。いくつかやりとりを紹介します。
 
-### 2024年4月28日
+
+![](https://shimizudan.github.io/20240831juliatokyo/suzuki.png)
+
+
+## 2024年4月28日
 
 
 
@@ -601,9 +595,8 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─be2c12b2-bd64-422d-97c7-1349c9149898
+# ╠═8acc204e-896e-11ed-1251-438ce5d793cb
 # ╠═866207ab-db72-4220-b1c7-9b73d0ac91e8
-# ╟─8acc204e-896e-11ed-1251-438ce5d793cb
 # ╠═fcbaf6f4-5f24-448d-937b-58374362c18a
 # ╠═f54dbff1-c1ab-47a2-bead-1484c97ecae3
 # ╠═cb86a55b-a5d6-40c0-9d0a-5a4528f34d67
