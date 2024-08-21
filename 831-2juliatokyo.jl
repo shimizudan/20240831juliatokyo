@@ -30,6 +30,9 @@ end
 # ╔═╡ f176d67e-bb13-43c7-8557-9b005945f4f9
 using Combinatorics
 
+# ╔═╡ 4d30e62d-dad0-4167-a907-7055ffa022ba
+html"<button onclick='present()'>present</button>"
+
 # ╔═╡ 866207ab-db72-4220-b1c7-9b73d0ac91e8
 md"""
 # はじめに
@@ -389,9 +392,32 @@ md"""
 
 # 高校数学の統計について
 
-大澤裕一さん[(@HirokazuOHSAWA)](https://x.com/HirokazuOHSAWA)とは統計の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです。。。）今回は，大澤裕一さんからの問題を少し発展させて考えた経過をご紹介します。
+大澤裕一さん[(@HirokazuOHSAWA)](https://x.com/HirokazuOHSAWA)とは数学の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです。。。）今回は，大澤裕一さんからの問題を少し発展させて考えた経過をご紹介します。
 
 
+![](https://shimizudan.github.io/20240831juliatokyo/ohsawa.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m1.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m2.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m3.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m4.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m5.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m6.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m7.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m8.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m9.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/m10.png)
+
+[https://github.com/shimizudan/20240808stat](https://github.com/shimizudan/20240808stat)
 """
 
 # ╔═╡ ef201ffb-5af5-4a5d-9c29-02d27ffcdd7b
@@ -794,6 +820,7 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
+# ╟─4d30e62d-dad0-4167-a907-7055ffa022ba
 # ╟─8acc204e-896e-11ed-1251-438ce5d793cb
 # ╟─866207ab-db72-4220-b1c7-9b73d0ac91e8
 # ╟─fcbaf6f4-5f24-448d-937b-58374362c18a
