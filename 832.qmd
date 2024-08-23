@@ -4,6 +4,10 @@ author: "清水　団　Dan Shimizu ([@dannchu](https://twitter.com/dannchu)) "
 date: "2024/8/31"
 jupyter: julia-1.10
 format:
+  revealjs:
+    menu:
+      side: right
+      width: wide
   html:
     toc: true
     toc-location: right
