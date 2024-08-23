@@ -467,10 +467,121 @@ end
 
 ### 期待値の理論値
 
-![]()
+![](https://shimizudan.github.io/20240831juliatokyo/x1.png)
 
 
-$ integral_0^2 x d x $
+{{< pagebreak >}}
+
+
+### 分散の理論値
+
+![](https://shimizudan.github.io/20240831juliatokyo/x2.png)
+
+![](https://shimizudan.github.io/20240831juliatokyo/x3.png)
+
+
+{{< pagebreak >}}
+
+
+### 期待値・分散を理論値と比較
+
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+using StatsPlots,Distributions
+	
+	#理論値・期待値
+	q(n) =0.5+0.5*0.8^(n-1)
+	heikin(n) = sum(q(i) for i =1:n)
+    #理論値・分散
+	function bunsan(n) 
+	    k = 0
+	    for  i = 1:n-1 , j = i+1:n
+	        k += q(i)*q(j-i+1)
+	    end
+	    heikin(n)-heikin(n)^2+2*k
+	end
+	
+	#標本平均 
+	m = 10^5
+	n = 100
+	X =[sample(n) for _= 1:m]
+	
+	@show mean(X);
+	@show heikin(n);
+	@show var(X,corrected=true);
+	@show bunsan(n);
+
+```
+
+
+
+{{< pagebreak >}}
+
+### 大数の法則
+
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+
+	# 大数の法則を見ておこう
+	m = 10^3
+	n = 100
+	
+	X =[sample(n) for _= 1:m]
+	Z = [mean(X[i] for i =1:k) for k =1:m]
+	
+	plot(Z,label="sample mean")
+	plot!(x->heikin(n),label="mean")
+
+
+```
+
+
+{{< pagebreak >}}
+
+
+### 中心極限定理
+
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+
+	#中心極限定理も見ておこう！
+	m , n =10^5,100
+	A = [sample(n) for _=1:m]
+	B = [[i,count(x -> x==i ,A)] for i = 1:n]
+	C = [B[i][2]./m for i=1:n]
+	
+	bar(C,label="sample")
+	@show mean(A)
+	@show std(A,corrected=false)
+	
+	plot!(Normal(mean(A),std(A,corrected=false)),label="Normal")
+
+
+```
+
+
+{{< pagebreak >}}
+
+# Zenn Booksの紹介
+
+私自身，勤務校で数学を担当していますが，「Julia言語使って数学の問題を考えるとどうなるのだろう？」ということに関心があります。高校数学の「場合の数」「確率」という分野の定期テストの問題を題材にJulia言語を用いて考えてみました。体感ですが，「julia言語を用いて数学の問題を考えると，考え方が拡張され，自由になる」と感じました。この2つの「Zenn Books」にまとめました。少しご紹介します。
+
+
+[https://zenn.dev/dannchu/books/f2fe475efb35dd](https://zenn.dev/dannchu/books/f2fe475efb35dd)
+
+![](https://shimizudan.github.io/20240831juliatokyo/book1.png)
+
+
+[https://zenn.dev/dannchu/books/19354174fa5f25](https://zenn.dev/dannchu/books/19354174fa5f25)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/book2.png)
 
 
 {{< pagebreak >}}
