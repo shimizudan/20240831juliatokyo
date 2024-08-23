@@ -37,7 +37,7 @@ html"<button onclick='present()'>present</button>"
 md"""
 # はじめに
 
-> ![](https://shimizudan.github.io/20240831juliatokyo/shimizu.png)
+![](https://shimizudan.github.io/20240831juliatokyo/shimizu.png)
 
 """
 
@@ -49,7 +49,7 @@ md"""
 
 > - **鈴木伸介さんとの交流**
 > - **合法うどん決定トーナメント**
-> - **高校数学の統計について**
+> - **大澤裕一さんとの交流**
 > - **Zenn Booksの紹介**
 
 """
@@ -64,6 +64,8 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 ![](https://shimizudan.github.io/20240831juliatokyo/suzuki.png)
 
 
+書籍など
+[https://amazon.co.jp/dp/4426129753/](https://amazon.co.jp/dp/4426129753/)
 ## 2024年4月28日
 
 ![](https://shimizudan.github.io/20240831juliatokyo/428m.png)
@@ -535,7 +537,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "288a77991b800670b5b003f0293670a631a8f3b5"
+project_hash = "55b7e4fa72cb51667a12915a3fff169e66998a48"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
