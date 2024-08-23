@@ -206,7 +206,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 {{< pagebreak >}}
 
 
-### **soi関数**
+### soi関数
 
 - うどんを合成する関数です。
 
@@ -233,7 +233,7 @@ end
 
 {{< pagebreak >}}
 
-### **カタラン数のリストチェック**
+### カタラン数のリストチェック
 
 - 1と2が同数あるリストを用いて，左端からどの番まででも（1の個数）≧（2の個数）となっているかチェックします。
 
@@ -271,7 +271,7 @@ end
 
 
 
-### **カタラン数のリスト作成**
+### カタラン数のリスト作成
 
 - 1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック
 - 総数はカタラン数C(n+1)である
@@ -306,7 +306,7 @@ catalan_list(4)
 
 {{< pagebreak >}}
 
-### **うどんの配列作成（soi_seq関数）**
+### うどんの配列作成（soi_seq関数）
 
 - カタラン数のリストからsoi関数で変換します。
 
@@ -345,7 +345,7 @@ end
 
 {{< pagebreak >}}
 
-### **soi_seqの逆関数**
+### soi_seqの逆関数
 
 - 結局，アルゴリズムはよくわからなかったです。
 - 関数は１対１だったので，ペアのリストを作ってチェックしました。
@@ -407,8 +407,8 @@ end
 
 この問題の期待値を求め，さらに，「分散ももとまるかな？」と思って，まずは理論的に求めました。そして，「juliaで実験してみよう！」と思って，実験しました。
 
-> - [https://x.com/dannchu/status/1821527374678389006](https://x.com/dannchu/status/1821527374678389006)
-> - [https://x.com/dannchu/status/1821692900322975852](https://x.com/dannchu/status/1821692900322975852)
+- [https://x.com/dannchu/status/1821527374678389006](https://x.com/dannchu/status/1821527374678389006)
+- [https://x.com/dannchu/status/1821692900322975852](https://x.com/dannchu/status/1821692900322975852)
 
 ...しかし，Juliaで計算結果と，理論的に求めたものが一致しません。個数を増やしてみたのですが，やはり違っているようでした。この後しばらく考えることになります。（8/9~8/13）
 
@@ -419,10 +419,58 @@ end
 
 ようやく，理論値が間違っていることがわかり修正できました。
 
-> - Xへの投稿 [https://x.com/dannchu/status/1823368586834116880](https://x.com/dannchu/status/1823368586834116880)
-> - まとめ　[https://github.com/shimizudan/20240808stat](https://github.com/shimizudan/20240808stat)
+- Xへの投稿 [https://x.com/dannchu/status/1823368586834116880](https://x.com/dannchu/status/1823368586834116880)
+- まとめ　[https://github.com/shimizudan/20240808stat](https://github.com/shimizudan/20240808stat)
 
-> ![](https://shimizudan.github.io/20240808stat/8080.pdf)
+![](https://shimizudan.github.io/20240808stat/8080.pdf)
+
+
+{{< pagebreak >}}
+
+### 標本を求める関数
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+
+#n人の中で何人赤旗を上げたのかを調べる。
+function sample(n)
+    if n == 1
+        1
+    else
+        p = 1
+        θ = 0 # 赤なら0，白なら1
+        r = [0,0,0,0,0,0,0,0,0,1]
+        w = [1,1,1,1,1,1,1,1,1,0]
+        for i = 2:n
+            if θ == 0 
+                t = rand(r)
+                if t == 0
+                    p += 1
+                elseif t ==1
+                    θ = 1
+                end
+            elseif θ == 1 
+                t = rand(w)
+                if t == 0
+                    p += 1
+                    θ = 0
+                end
+            end
+        end
+        return p
+    end
+end
+
+```
+
+
+### 期待値の理論値
+
+![]()
+
+
+$ integral_0^2 x d x $
 
 
 {{< pagebreak >}}

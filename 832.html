@@ -130,17 +130,22 @@ window.Quarto = {
   <li><a href="#カタラン数との対応" id="toc-カタラン数との対応" class="nav-link" data-scroll-target="#カタラン数との対応">カタラン数との対応</a></li>
   <li><a href="#julia-のコード" id="toc-julia-のコード" class="nav-link" data-scroll-target="#julia-のコード">Julia のコード</a>
   <ul class="collapse">
-  <li><a href="#soi関数" id="toc-soi関数" class="nav-link" data-scroll-target="#soi関数"><strong>soi関数</strong></a></li>
-  <li><a href="#カタラン数のリストチェック" id="toc-カタラン数のリストチェック" class="nav-link" data-scroll-target="#カタラン数のリストチェック"><strong>カタラン数のリストチェック</strong></a></li>
-  <li><a href="#カタラン数のリスト作成" id="toc-カタラン数のリスト作成" class="nav-link" data-scroll-target="#カタラン数のリスト作成"><strong>カタラン数のリスト作成</strong></a></li>
-  <li><a href="#うどんの配列作成soi_seq関数" id="toc-うどんの配列作成soi_seq関数" class="nav-link" data-scroll-target="#うどんの配列作成soi_seq関数"><strong>うどんの配列作成（soi_seq関数）</strong></a></li>
-  <li><a href="#soi_seqの逆関数" id="toc-soi_seqの逆関数" class="nav-link" data-scroll-target="#soi_seqの逆関数"><strong>soi_seqの逆関数</strong></a></li>
+  <li><a href="#soi関数" id="toc-soi関数" class="nav-link" data-scroll-target="#soi関数">soi関数</a></li>
+  <li><a href="#カタラン数のリストチェック" id="toc-カタラン数のリストチェック" class="nav-link" data-scroll-target="#カタラン数のリストチェック">カタラン数のリストチェック</a></li>
+  <li><a href="#カタラン数のリスト作成" id="toc-カタラン数のリスト作成" class="nav-link" data-scroll-target="#カタラン数のリスト作成">カタラン数のリスト作成</a></li>
+  <li><a href="#うどんの配列作成soi_seq関数" id="toc-うどんの配列作成soi_seq関数" class="nav-link" data-scroll-target="#うどんの配列作成soi_seq関数">うどんの配列作成（soi_seq関数）</a></li>
+  <li><a href="#soi_seqの逆関数" id="toc-soi_seqの逆関数" class="nav-link" data-scroll-target="#soi_seqの逆関数">soi_seqの逆関数</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#大澤裕一さんとの交流" id="toc-大澤裕一さんとの交流" class="nav-link" data-scroll-target="#大澤裕一さんとの交流">大澤裕一さんとの交流</a>
   <ul class="collapse">
+  <li><a href="#問題" id="toc-問題" class="nav-link" data-scroll-target="#問題">問題</a></li>
   <li><a href="#xへの投稿" id="toc-xへの投稿" class="nav-link" data-scroll-target="#xへの投稿">Xへの投稿</a></li>
-  <li><a href="#juliaのコード" id="toc-juliaのコード" class="nav-link" data-scroll-target="#juliaのコード">Juliaのコード</a></li>
+  <li><a href="#juliaのコード" id="toc-juliaのコード" class="nav-link" data-scroll-target="#juliaのコード">Juliaのコード</a>
+  <ul class="collapse">
+  <li><a href="#標本を求める関数" id="toc-標本を求める関数" class="nav-link" data-scroll-target="#標本を求める関数">標本を求める関数</a></li>
+  <li><a href="#期待値の理論値" id="toc-期待値の理論値" class="nav-link" data-scroll-target="#期待値の理論値">期待値の理論値</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -205,7 +210,7 @@ window.Quarto = {
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/428m.png" class="img-fluid"></p>
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/428.png" class="img-fluid"></p>
 <div style="page-break-after: always;"></div>
-<div id="75956287" class="cell" data-execution_count="1">
+<div id="e18fb075" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/4/28</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="fl">1</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> x <span class="op">&lt;</span> <span class="fl">1000</span> <span class="co">#まあ1000くらいまでで大丈夫かな。</span></span>
@@ -233,10 +238,10 @@ window.Quarto = {
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/707m.png" class="img-fluid"></p>
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/707.png" class="img-fluid"></p>
 <div style="page-break-after: always;"></div>
-<div id="2292486a" class="cell" data-execution_count="2">
+<div id="e10d5c1c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/7/7</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lcm</span>(<span class="fl">21</span>,<span class="fl">15</span>)<span class="op">//</span><span class="fu">gcd</span>(<span class="fl">104</span>,<span class="fl">182</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="132">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>105//26</code></pre>
 </div>
 </div>
@@ -247,7 +252,7 @@ window.Quarto = {
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/804m.png" class="img-fluid"></p>
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/804.png" class="img-fluid"></p>
 <div style="page-break-after: always;"></div>
-<div id="75f4262d" class="cell" data-execution_count="3">
+<div id="3de36003" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/8/4</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#みかん1個✕円、りんご1個y円</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Aさんの所持金は30x＝18y 円</span></span>
@@ -270,10 +275,10 @@ window.Quarto = {
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/817m.png" class="img-fluid"></p>
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/817.png" class="img-fluid"></p>
 <div style="page-break-after: always;"></div>
-<div id="4a6db56d" class="cell" data-execution_count="4">
+<div id="737c1d91" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/8/17</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     [(x,y) for x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">33</span> , y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">14</span> if <span class="fl">3</span>x<span class="op">+</span><span class="fl">7</span>y <span class="op">==</span> <span class="fl">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="134">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>5-element Vector{Tuple{Int64, Int64}}:
  (31, 1)
  (24, 4)
@@ -329,11 +334,11 @@ window.Quarto = {
 </ul>
 <div style="page-break-after: always;"></div>
 <section id="soi関数" class="level3">
-<h3 class="anchored" data-anchor-id="soi関数"><strong>soi関数</strong></h3>
+<h3 class="anchored" data-anchor-id="soi関数">soi関数</h3>
 <ul>
 <li>うどんを合成する関数です。</li>
 </ul>
-<div id="da117420" class="cell" data-execution_count="5">
+<div id="d4d51666" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#soi関数</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">soi</span>(A<span class="op">::</span><span class="dt">Vector</span>,B<span class="op">::</span><span class="dt">Vector</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> B</span>
@@ -359,11 +364,11 @@ soi([1, 2, 3], [4]) = [3, 2, 1, 4]</code></pre>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="カタラン数のリストチェック" class="level3">
-<h3 class="anchored" data-anchor-id="カタラン数のリストチェック"><strong>カタラン数のリストチェック</strong></h3>
+<h3 class="anchored" data-anchor-id="カタラン数のリストチェック">カタラン数のリストチェック</h3>
 <ul>
 <li>1と2が同数あるリストを用いて，左端からどの番まででも（1の個数）≧（2の個数）となっているかチェックします。</li>
 </ul>
-<div id="c9ef36b6" class="cell" data-execution_count="6">
+<div id="bb1c9c83" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#左端からどの番まででも（1の個数）≧（2の個数）となっているかチェック</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">catalan_check</span>(sequence<span class="op">::</span><span class="dt">Vector{Int}</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    count1 <span class="op">=</span> <span class="fl">0</span></span>
@@ -396,13 +401,13 @@ catalan_check([1, 2, 2, 1, 2, 1, 1, 2]) = false</code></pre>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="カタラン数のリスト作成" class="level3">
-<h3 class="anchored" data-anchor-id="カタラン数のリスト作成"><strong>カタラン数のリスト作成</strong></h3>
+<h3 class="anchored" data-anchor-id="カタラン数のリスト作成">カタラン数のリスト作成</h3>
 <ul>
 <li>1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック</li>
 <li>総数はカタラン数C(n+1)である</li>
 <li><code>Combinatorics.jl</code>を利用します。</li>
 </ul>
-<div id="435a3509" class="cell" data-execution_count="7">
+<div id="f3577287" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Combinatorics</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック</span></span>
@@ -422,7 +427,7 @@ catalan_check([1, 2, 2, 1, 2, 1, 1, 2]) = false</code></pre>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#n=4の時のカタラン数のリスト</span></span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">catalan_list</span>(<span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="137">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>14-element Vector{Any}:
  [1, 2, 1, 2, 1, 2, 1, 2]
  [1, 2, 1, 2, 1, 1, 2, 2]
@@ -443,11 +448,11 @@ catalan_check([1, 2, 2, 1, 2, 1, 1, 2]) = false</code></pre>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="うどんの配列作成soi_seq関数" class="level3">
-<h3 class="anchored" data-anchor-id="うどんの配列作成soi_seq関数"><strong>うどんの配列作成（soi_seq関数）</strong></h3>
+<h3 class="anchored" data-anchor-id="うどんの配列作成soi_seq関数">うどんの配列作成（soi_seq関数）</h3>
 <ul>
 <li>カタラン数のリストからsoi関数で変換します。</li>
 </ul>
-<div id="b3b18d40" class="cell" data-execution_count="8">
+<div id="0ba6e363" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#カタラン数のリストからsoi関数で変換</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">soi_seq</span>(X<span class="op">::</span><span class="dt">Vector</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> <span class="fu">length</span>(X)</span>
@@ -494,13 +499,13 @@ soi_seq(i) = [1, 1, 1, 1, 2, 2, 2, 2] =&gt; [4, 2, 1, 3, 5]</code></pre>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="soi_seqの逆関数" class="level3">
-<h3 class="anchored" data-anchor-id="soi_seqの逆関数"><strong>soi_seqの逆関数</strong></h3>
+<h3 class="anchored" data-anchor-id="soi_seqの逆関数">soi_seqの逆関数</h3>
 <ul>
 <li>結局，アルゴリズムはよくわからなかったです。</li>
 <li>関数は１対１だったので，ペアのリストを作ってチェックしました。</li>
 <li>１対1は明らかではなかったのですが，一応確認は取れています。</li>
 </ul>
-<div id="604b269e" class="cell" data-execution_count="9">
+<div id="e7f58a58" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># soi_seqの逆変換を行う関数</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">inverse_soi_seq</span>(sequence<span class="op">::</span><span class="dt">Vector</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="fu">length</span>(sequence) <span class="op">-</span><span class="fl">1</span></span>
@@ -538,32 +543,75 @@ inverse_soi_seq([2, 1, 3, 4, 5, 6]) = [1, 1, 2, 2, 1, 2, 1, 2, 1, 2]</code></pre
 </section>
 <section id="大澤裕一さんとの交流" class="level1">
 <h1>大澤裕一さんとの交流</h1>
-<p>大澤裕一さん<a href="https://x.com/HirokazuOHSAWA">(<span class="citation" data-cites="HirokazuOHSAWA">@HirokazuOHSAWA</span>)</a>とは数学の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです。。。）今回は，大澤裕一さんからの問題を少し発展させて考えた経過をご紹介します。</p>
+<p>大澤裕一さん<a href="https://x.com/HirokazuOHSAWA">(<span class="citation" data-cites="HirokazuOHSAWA">@HirokazuOHSAWA</span>)</a>とは数学の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです…）今回は，大澤裕一さんからの問題を少し発展させて考えた経過をご紹介します。</p>
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/ohsawa.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<section id="問題" class="level2">
+<h2 class="anchored" data-anchor-id="問題">問題</h2>
 <p><img src="https://shimizudan.github.io/20240831juliatokyo/m1.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+</section>
 <section id="xへの投稿" class="level2">
 <h2 class="anchored" data-anchor-id="xへの投稿">Xへの投稿</h2>
 <p>この問題の期待値を求め，さらに，「分散ももとまるかな？」と思って，まずは理論的に求めました。そして，「juliaで実験してみよう！」と思って，実験しました。</p>
-<blockquote class="blockquote">
 <ul>
 <li><a href="https://x.com/dannchu/status/1821527374678389006">https://x.com/dannchu/status/1821527374678389006</a></li>
 <li><a href="https://x.com/dannchu/status/1821692900322975852">https://x.com/dannchu/status/1821692900322975852</a></li>
 </ul>
-</blockquote>
 <p>…しかし，Juliaで計算結果と，理論的に求めたものが一致しません。個数を増やしてみたのですが，やはり違っているようでした。この後しばらく考えることになります。（8/9~8/13）</p>
+<div style="page-break-after: always;"></div>
 </section>
 <section id="juliaのコード" class="level2">
 <h2 class="anchored" data-anchor-id="juliaのコード">Juliaのコード</h2>
 <p>ようやく，理論値が間違っていることがわかり修正できました。</p>
-<blockquote class="blockquote">
 <ul>
 <li>Xへの投稿 <a href="https://x.com/dannchu/status/1823368586834116880">https://x.com/dannchu/status/1823368586834116880</a></li>
 <li>まとめ　<a href="https://github.com/shimizudan/20240808stat">https://github.com/shimizudan/20240808stat</a></li>
 </ul>
-</blockquote>
-<blockquote class="blockquote">
 <p><embed src="https://shimizudan.github.io/20240808stat/8080.pdf" class="img-fluid"></p>
-</blockquote>
+<div style="page-break-after: always;"></div>
+<section id="標本を求める関数" class="level3">
+<h3 class="anchored" data-anchor-id="標本を求める関数">標本を求める関数</h3>
+<div id="102d70ba" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#n人の中で何人赤旗を上げたのかを調べる。</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">sample</span>(n)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="fl">1</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="fl">1</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        θ <span class="op">=</span> <span class="fl">0</span> <span class="co"># 赤なら0，白なら1</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> [<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>]</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> [<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>]</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="fl">2</span><span class="op">:</span>n</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> θ <span class="op">==</span> <span class="fl">0</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> <span class="fu">rand</span>(r)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> t <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                    p <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elseif</span> t <span class="op">==</span><span class="fl">1</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                    θ <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">end</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elseif</span> θ <span class="op">==</span> <span class="fl">1</span> </span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> <span class="fu">rand</span>(w)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> t <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>                    p <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>                    θ <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">end</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">end</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> p</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>sample (generic function with 1 method)</code></pre>
+</div>
+</div>
+</section>
+<section id="期待値の理論値" class="level3">
+<h3 class="anchored" data-anchor-id="期待値の理論値">期待値の理論値</h3>
+<!-- $$ \int_0^1 x d x $$ -->
+<p>$ integral_0^2 x d x $</p>
+<div style="page-break-after: always;"></div>
+</section>
 </section>
 </section>
 
