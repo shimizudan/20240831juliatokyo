@@ -422,7 +422,8 @@ end
 - Xへの投稿 [https://x.com/dannchu/status/1823368586834116880](https://x.com/dannchu/status/1823368586834116880)
 - まとめ　[https://github.com/shimizudan/20240808stat](https://github.com/shimizudan/20240808stat)
 
-![](https://shimizudan.github.io/20240808stat/8080.pdf)
+<!-- 
+![](https://shimizudan.github.io/20240808stat/8080.pdf) -->
 
 
 {{< pagebreak >}}
