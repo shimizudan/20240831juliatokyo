@@ -4,11 +4,14 @@ author: "清水　団　Dan Shimizu ([@dannchu](https://twitter.com/dannchu)) "
 date: "2024/8/31"
 jupyter: julia-1.10
 format:
-  html:
-    toc: true
-    toc-location: right
+    revealjs:
+        smaller: true
+        scrollable: true
+    html:
+        toc: true
+        toc-location: right
 ---
-# はじめに
+## はじめに
 
 
  ![](https://shimizudan.github.io/20240831juliatokyo/shimizu.png)
@@ -17,7 +20,7 @@ format:
 {{< pagebreak >}}
 
 
-## 最近の取り組み
+### 最近の取り組み
 
 **「数学を考えるときにJulia言語を使うととてもいい感じ！」**をキャッチフレーズに，主にXなどで発信・情報交換をしています。今日はその中から4つ紹介します。
 
@@ -29,7 +32,7 @@ format:
 
 {{< pagebreak >}}
 
-# 鈴木伸介さんとの交流
+## 鈴木伸介さんとの交流
 
 X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を出してくれます。なんとなく，julia言語使って解くことが習慣になってしまいました。いくつかやりとりを紹介します。
 
@@ -42,7 +45,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 
 {{< pagebreak >}}
 
-## 2024年4月28日
+### 2024年4月28日
 
 ![](https://shimizudan.github.io/20240831juliatokyo/428m.png)
 
@@ -76,7 +79,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 
 {{< pagebreak >}}
 
-## 2024年7月7日
+### 2024年7月7日
 
 ![](https://shimizudan.github.io/20240831juliatokyo/707m.png)
 
@@ -94,7 +97,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 
 {{< pagebreak >}}
 
-## 2024年8月4日
+### 2024年8月4日
 
 ![](https://shimizudan.github.io/20240831juliatokyo/804m.png)
 
@@ -124,7 +127,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 {{< pagebreak >}}
 
 
-## 2024年8月17日
+### 2024年8月17日
 
 ![](https://shimizudan.github.io/20240831juliatokyo/817m.png)
 
@@ -145,7 +148,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 {{< pagebreak >}}
 
 
-# 合法うどん決定トーナメント
+## 合法うどん決定トーナメント
 
 「合法うどん決定トーナメント」とは数学コミュニティー「数学デー」の中で話題となり，2024/8/1にポストされました。
 
@@ -156,35 +159,35 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 
 {{< pagebreak >}}
 
-## n=3 のとき，2通りですね。
+### n=3 のとき，2通りですね。
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n3.jpg)
 
 
 {{< pagebreak >}}
 
-## n=4 のとき，5通りですね。
+### n=4 のとき，5通りですね。
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n4.jpg)
 
 
 {{< pagebreak >}}
 
-## n=5 のとき，14通りですね。
+### n=5 のとき，14通りですね。
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n5.png)
 
 
 {{< pagebreak >}}
 
-## n=6 のとき，42通りですね。
+### n=6 のとき，42通りですね。
 
 ![](https://shimizudan.github.io/20240831juliatokyo/n6.png)
 
 
 {{< pagebreak >}}
 
-## カタラン数との対応
+### カタラン数との対応
 
 - 数の並びは$1,1,2,5,14,42,...$となり，これはカタラン数ですね，
 - [@aoki_taichi](https://x.com/aoki_taichi)さんのXへの投稿を参考にしました。
@@ -196,7 +199,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 
 {{< pagebreak >}}
 
-## Julia のコード
+### Julia のコード
 
 - カタラン数のリストからうどんの配置パターンを作成
 - 逆に配置パターンからカタラン数のリストを決定する
@@ -206,7 +209,7 @@ X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を�
 {{< pagebreak >}}
 
 
-### soi関数
+#### soi関数
 
 - うどんを合成する関数です。
 
@@ -233,7 +236,7 @@ end
 
 {{< pagebreak >}}
 
-### カタラン数のリストチェック
+#### カタラン数のリストチェック
 
 - 1と2が同数あるリストを用いて，左端からどの番まででも（1の個数）≧（2の個数）となっているかチェックします。
 
@@ -271,7 +274,7 @@ end
 
 
 
-### カタラン数のリスト作成
+#### カタラン数のリスト作成
 
 - 1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック
 - 総数はカタラン数C(n+1)である
@@ -306,7 +309,7 @@ catalan_list(4)
 
 {{< pagebreak >}}
 
-### うどんの配列作成（soi_seq関数）
+#### うどんの配列作成（soi_seq関数）
 
 - カタラン数のリストからsoi関数で変換します。
 
@@ -345,7 +348,7 @@ end
 
 {{< pagebreak >}}
 
-### soi_seqの逆関数
+#### soi_seqの逆関数
 
 - 結局，アルゴリズムはよくわからなかったです。
 - 関数は１対１だったので，ペアのリストを作ってチェックしました。
@@ -386,7 +389,7 @@ end
 
 
 
-# 大澤裕一さんとの交流
+## 大澤裕一さんとの交流
 
 大澤裕一さん[(@HirokazuOHSAWA)](https://x.com/HirokazuOHSAWA)とは数学の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです...）今回は，大澤裕一さんからの問題を少し発展させて考えた経過をご紹介します。
 
@@ -396,14 +399,14 @@ end
 
 {{< pagebreak >}}
 
-## 問題
+### 問題
 
 ![](https://shimizudan.github.io/20240831juliatokyo/m1.png)
 
 
 {{< pagebreak >}}
 
-## Xへの投稿
+### Xへの投稿
 
 この問題の期待値を求め，さらに，「分散ももとまるかな？」と思って，まずは理論的に求めました。そして，「juliaで実験してみよう！」と思って，実験しました。
 
@@ -415,7 +418,7 @@ end
 
 {{< pagebreak >}}
 
-## Juliaのコード
+### Juliaのコード
 
 ようやく，理論値が間違っていることがわかり修正できました。
 
@@ -428,7 +431,7 @@ end
 
 {{< pagebreak >}}
 
-### 標本を求める関数
+#### 標本を求める関数
 
 ```{julia}
 #| code-fold: false
@@ -466,7 +469,7 @@ end
 ```
 
 
-### 期待値の理論値
+#### 期待値の理論値
 
 ![](https://shimizudan.github.io/20240831juliatokyo/x1.png)
 
@@ -474,7 +477,7 @@ end
 {{< pagebreak >}}
 
 
-### 分散の理論値
+#### 分散の理論値
 
 ![](https://shimizudan.github.io/20240831juliatokyo/x2.png)
 
@@ -484,7 +487,7 @@ end
 {{< pagebreak >}}
 
 
-### 期待値・分散を理論値と比較
+#### 期待値・分散を理論値と比較
 
 
 ```{julia}
@@ -520,7 +523,7 @@ using StatsPlots,Distributions
 
 {{< pagebreak >}}
 
-### 大数の法則
+#### 大数の法則
 
 
 ```{julia}
@@ -544,7 +547,7 @@ using StatsPlots,Distributions
 {{< pagebreak >}}
 
 
-### 中心極限定理
+#### 中心極限定理
 
 
 ```{julia}
@@ -569,7 +572,7 @@ using StatsPlots,Distributions
 
 {{< pagebreak >}}
 
-# Zenn Booksの紹介
+## Zenn Booksの紹介
 
 私自身，勤務校で数学を担当していますが，「Julia言語使って数学の問題を考えるとどうなるのだろう？」ということに関心があります。高校数学の「場合の数」「確率」という分野の定期テストの問題を題材にJulia言語を用いて考えてみました。体感ですが，「julia言語を用いて数学の問題を考えると，考え方が拡張され，自由になる」と感じました。この2つの「Zenn Books」にまとめました。少しご紹介します。
 
