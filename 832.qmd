@@ -1,0 +1,428 @@
+---
+title: "高校数学とJulia"
+author: "清水　団　Dan Shimizu ([@dannchu](https://twitter.com/dannchu)) "
+date: "2024/8/31"
+jupyter: julia-1.10
+format:
+  html:
+    toc: true
+    toc-location: right
+---
+# はじめに
+
+
+ ![](https://shimizudan.github.io/20240831juliatokyo/shimizu.png)
+
+
+{{< pagebreak >}}
+
+
+## 最近の取り組み
+
+**「数学を考えるときにJulia言語を使うととてもいい感じ！」**をキャッチフレーズに，主にXなどで発信・情報交換をしています。今日はその中から4つ紹介します。
+
+- **鈴木伸介さんとの交流**
+- **合法うどん決定トーナメント**
+- **大澤裕一さんとの交流**
+- **Zenn Booksの紹介**
+
+
+{{< pagebreak >}}
+
+# 鈴木伸介さんとの交流
+
+X上で鈴木伸介さん[(@suzzukes)](@suzzukes)が土日に数学の問題を出してくれます。なんとなく，julia言語使って解くことが習慣になってしまいました。いくつかやりとりを紹介します。
+
+![](https://shimizudan.github.io/20240831juliatokyo/suzuki.png)
+
+
+書籍など
+[https://amazon.co.jp/dp/4426129753/](https://amazon.co.jp/dp/4426129753/)
+
+
+{{< pagebreak >}}
+
+## 2024年4月28日
+
+![](https://shimizudan.github.io/20240831juliatokyo/428m.png)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/428.png)
+
+
+
+{{< pagebreak >}}
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+#2024/4/28
+	x = 1
+	while x < 1000 #まあ1000くらいまでで大丈夫かな。
+	    k = 0
+	    for j = x:x+10
+	        if j |> iseven 
+	            k += j
+	        else k -= j
+	        end
+	    end
+	    if k == 19
+	        println("$(x)〜$(x+10)の11個の自然数。最大の自然数は$(x+10)")
+	        break
+	    end
+	    x += 1
+	end
+```
+
+{{< pagebreak >}}
+
+## 2024年7月7日
+
+![](https://shimizudan.github.io/20240831juliatokyo/707m.png)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/707.png)
+
+{{< pagebreak >}}
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+#2024/7/7
+    lcm(21,15)//gcd(104,182)
+```
+
+{{< pagebreak >}}
+
+## 2024年8月4日
+
+![](https://shimizudan.github.io/20240831juliatokyo/804m.png)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/804.png)
+
+
+
+{{< pagebreak >}}
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+#2024/8/4
+ 	#みかん1個✕円、りんご1個y円
+	#Aさんの所持金は30x＝18y 円
+	#りんごをn個買うと、みかんは24-n個
+	# 30x=（24-n） x+n30x/18
+	#n + (24-n) *30/18 -30 =0
+		
+	using SimplePolynomials
+	n = getx()
+	N = roots(n*30/18+(24-n)-30)[1] |> Int64
+	println("りんごは$(N)個")
+```
+
+{{< pagebreak >}}
+
+
+## 2024年8月17日
+
+![](https://shimizudan.github.io/20240831juliatokyo/817m.png)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/817.png)
+
+
+
+{{< pagebreak >}}
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+#2024/8/17
+     [(x,y) for x = 1:33 , y = 1:14 if 3x+7y == 100]
+```
+
+{{< pagebreak >}}
+
+
+# 合法うどん決定トーナメント
+
+「合法うどん決定トーナメント」とは数学コミュニティー「数学デー」の中で話題となり，2024/8/1にポストされました。
+
+[https://x.com/sugaku_day/status/1818672471383720013](https://x.com/sugaku_day/status/1818672471383720013)
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/1.jpeg)
+
+{{< pagebreak >}}
+
+## n=3 のとき，2通りですね。
+
+![](https://shimizudan.github.io/20240831juliatokyo/n3.jpg)
+
+
+{{< pagebreak >}}
+
+## n=4 のとき，5通りですね。
+
+![](https://shimizudan.github.io/20240831juliatokyo/n4.jpg)
+
+
+{{< pagebreak >}}
+
+## n=5 のとき，14通りですね。
+
+![](https://shimizudan.github.io/20240831juliatokyo/n5.png)
+
+
+{{< pagebreak >}}
+
+## n=6 のとき，42通りですね。
+
+![](https://shimizudan.github.io/20240831juliatokyo/n6.png)
+
+
+{{< pagebreak >}}
+
+## カタラン数との対応
+
+- 数の並びは$1,1,2,5,14,42,...$となり，これはカタラン数ですね，
+- [@aoki_taichi](https://x.com/aoki_taichi)さんのXへの投稿を参考にしました。
+- [https://x.com/aoki_taichi/status/1819035623648587968](https://x.com/aoki_taichi/status/1819035623648587968)
+
+![](https://shimizudan.github.io/20240831juliatokyo/k.jpg)
+
+
+
+{{< pagebreak >}}
+
+## Julia のコード
+
+- カタラン数のリストからうどんの配置パターンを作成
+- 逆に配置パターンからカタラン数のリストを決定する
+
+
+
+{{< pagebreak >}}
+
+
+### **soi関数**
+
+- うどんを合成する関数です。
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+#soi関数
+function soi(A::Vector,B::Vector)
+	X = B
+	l = length(A)
+	for i = 1:l
+		pushfirst!(X,A[i])
+	end
+	X
+end
+
+#soi関数の例
+@show soi([1],[2])
+@show soi([1],[2,3])
+@show soi([1,2],[3])
+@show soi([1,2,3],[4]);
+```
+
+
+{{< pagebreak >}}
+
+### **カタラン数のリストチェック**
+
+- 1と2が同数あるリストを用いて，左端からどの番まででも（1の個数）≧（2の個数）となっているかチェックします。
+
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+#左端からどの番まででも（1の個数）≧（2の個数）となっているかチェック
+function catalan_check(sequence::Vector{Int})
+    count1 = 0
+    count2 = 0
+    for i in sequence
+        if i == 1
+            count1 += 1
+        elseif i == 2
+            count2 += 1
+        end
+        if count2 > count1
+            return false
+        end
+    end
+    return true
+end
+
+#チェック例
+@show catalan_check([1,1,1,1,2,2,2,2])
+@show catalan_check([1,2,1,1,2,1,2,2])
+@show catalan_check([2,2,2,2,1,1,1,1])
+@show catalan_check([1,2,2,1,2,1,1,2]);
+
+```
+
+
+{{< pagebreak >}}
+
+
+
+### **カタラン数のリスト作成**
+
+- 1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック
+- 総数はカタラン数C(n+1)である
+- `Combinatorics.jl`を利用します。
+
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+
+using Combinatorics
+
+#1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック
+#総数はカタラン数C(n+1)である
+function catalan_list(n)
+    X = [i for i = 1:2*n]
+    Z = []
+    for  x in combinations(X,n)
+        Y = ones(Int64,2*n)
+        for i in x
+            Y[i] = 2
+        end
+        push!(Z,Y)
+    end
+    filter(catalan_check, Z)
+end
+
+#n=4の時のカタラン数のリスト
+catalan_list(4)
+```
+
+
+{{< pagebreak >}}
+
+### **うどんの配列作成（soi_seq関数）**
+
+- カタラン数のリストからsoi関数で変換します。
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+
+#カタラン数のリストからsoi関数で変換
+function soi_seq(X::Vector)
+    l = length(X)
+    m = l//2 +1|> Int64
+    P = [[i] for i = 1:m]
+    count1 = 0
+    count2 = 0
+    while l >0
+        if X[l] == 1
+            A = soi(P[m-count2],P[m-count2+1])
+            deleteat!(P, m-count2)
+            deleteat!(P, m-count2)
+            insert!(P,  m-count2,A)
+            count1 += 1
+        elseif X[l] == 2
+            count2 += 1
+        end
+        l -= 1
+    end
+    X => P[1]
+end
+
+#n=4でチェック
+for i  ∈ catalan_list(4)
+    @show soi_seq(i)
+end
+```
+
+
+{{< pagebreak >}}
+
+### **soi_seqの逆関数**
+
+- 結局，アルゴリズムはよくわからなかったです。
+- 関数は１対１だったので，ペアのリストを作ってチェックしました。
+- １対1は明らかではなかったのですが，一応確認は取れています。
+
+```{julia}
+#| code-fold: false
+#| code-summary: "Show the code"
+
+# soi_seqの逆変換を行う関数
+function inverse_soi_seq(sequence::Vector)
+    n = length(sequence) -1
+    
+    # カタラン数リストを生成
+    catalan_seqs = catalan_list(n)
+    
+    # 与えられたシーケンスがカタラン数リストに対応するかチェック
+    for seq in catalan_seqs
+        _, transformed = soi_seq(seq)
+        if transformed == sequence
+            return seq
+        end
+    end
+    
+    return "対応するカタラン数のリストはない"
+end
+
+
+#逆変換の例
+@show inverse_soi_seq([1,2,4,3,5,6])
+@show inverse_soi_seq([1,2,4,3,6,5])
+@show inverse_soi_seq([1,2,3,4,6,5])
+@show inverse_soi_seq([2,1,3,4,5,6]);
+```
+
+
+{{< pagebreak >}}
+
+
+
+# 大澤裕一さんとの交流
+
+大澤裕一さん[(@HirokazuOHSAWA)](https://x.com/HirokazuOHSAWA)とは数学の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです...）今回は，大澤裕一さんからの問題を少し発展させて考えた経過をご紹介します。
+
+
+![](https://shimizudan.github.io/20240831juliatokyo/ohsawa.png)
+
+
+{{< pagebreak >}}
+
+## 問題
+
+![](https://shimizudan.github.io/20240831juliatokyo/m1.png)
+
+
+{{< pagebreak >}}
+
+## Xへの投稿
+
+この問題の期待値を求め，さらに，「分散ももとまるかな？」と思って，まずは理論的に求めました。そして，「juliaで実験してみよう！」と思って，実験しました。
+
+> - [https://x.com/dannchu/status/1821527374678389006](https://x.com/dannchu/status/1821527374678389006)
+> - [https://x.com/dannchu/status/1821692900322975852](https://x.com/dannchu/status/1821692900322975852)
+
+...しかし，Juliaで計算結果と，理論的に求めたものが一致しません。個数を増やしてみたのですが，やはり違っているようでした。この後しばらく考えることになります。（8/9~8/13）
+
+
+{{< pagebreak >}}
+
+## Juliaのコード
+
+ようやく，理論値が間違っていることがわかり修正できました。
+
+> - Xへの投稿 [https://x.com/dannchu/status/1823368586834116880](https://x.com/dannchu/status/1823368586834116880)
+> - まとめ　[https://github.com/shimizudan/20240808stat](https://github.com/shimizudan/20240808stat)
+
+> ![](https://shimizudan.github.io/20240808stat/8080.pdf)
+
+
+{{< pagebreak >}}

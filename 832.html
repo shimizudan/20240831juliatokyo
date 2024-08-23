@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="清水　団　Dan Shimizu (@dannchu)">
+<meta name="dcterms.date" content="2024-08-31">
+
+<title>高校数学とJulia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="832_files/libs/clipboard/clipboard.min.js"></script>
+<script src="832_files/libs/quarto-html/quarto.js"></script>
+<script src="832_files/libs/quarto-html/popper.min.js"></script>
+<script src="832_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="832_files/libs/quarto-html/anchor.min.js"></script>
+<link href="832_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="832_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="832_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="832_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="832_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#はじめに" id="toc-はじめに" class="nav-link active" data-scroll-target="#はじめに">はじめに</a>
+  <ul class="collapse">
+  <li><a href="#最近の取り組み" id="toc-最近の取り組み" class="nav-link" data-scroll-target="#最近の取り組み">最近の取り組み</a></li>
+  </ul></li>
+  <li><a href="#鈴木伸介さんとの交流" id="toc-鈴木伸介さんとの交流" class="nav-link" data-scroll-target="#鈴木伸介さんとの交流">鈴木伸介さんとの交流</a>
+  <ul class="collapse">
+  <li><a href="#年4月28日" id="toc-年4月28日" class="nav-link" data-scroll-target="#年4月28日">2024年4月28日</a></li>
+  <li><a href="#年7月7日" id="toc-年7月7日" class="nav-link" data-scroll-target="#年7月7日">2024年7月7日</a></li>
+  <li><a href="#年8月4日" id="toc-年8月4日" class="nav-link" data-scroll-target="#年8月4日">2024年8月4日</a></li>
+  <li><a href="#年8月17日" id="toc-年8月17日" class="nav-link" data-scroll-target="#年8月17日">2024年8月17日</a></li>
+  </ul></li>
+  <li><a href="#合法うどん決定トーナメント" id="toc-合法うどん決定トーナメント" class="nav-link" data-scroll-target="#合法うどん決定トーナメント">合法うどん決定トーナメント</a>
+  <ul class="collapse">
+  <li><a href="#n3-のとき2通りですね" id="toc-n3-のとき2通りですね" class="nav-link" data-scroll-target="#n3-のとき2通りですね">n=3 のとき，2通りですね。</a></li>
+  <li><a href="#n4-のとき5通りですね" id="toc-n4-のとき5通りですね" class="nav-link" data-scroll-target="#n4-のとき5通りですね">n=4 のとき，5通りですね。</a></li>
+  <li><a href="#n5-のとき14通りですね" id="toc-n5-のとき14通りですね" class="nav-link" data-scroll-target="#n5-のとき14通りですね">n=5 のとき，14通りですね。</a></li>
+  <li><a href="#n6-のとき42通りですね" id="toc-n6-のとき42通りですね" class="nav-link" data-scroll-target="#n6-のとき42通りですね">n=6 のとき，42通りですね。</a></li>
+  <li><a href="#カタラン数との対応" id="toc-カタラン数との対応" class="nav-link" data-scroll-target="#カタラン数との対応">カタラン数との対応</a></li>
+  <li><a href="#julia-のコード" id="toc-julia-のコード" class="nav-link" data-scroll-target="#julia-のコード">Julia のコード</a>
+  <ul class="collapse">
+  <li><a href="#soi関数" id="toc-soi関数" class="nav-link" data-scroll-target="#soi関数"><strong>soi関数</strong></a></li>
+  <li><a href="#カタラン数のリストチェック" id="toc-カタラン数のリストチェック" class="nav-link" data-scroll-target="#カタラン数のリストチェック"><strong>カタラン数のリストチェック</strong></a></li>
+  <li><a href="#カタラン数のリスト作成" id="toc-カタラン数のリスト作成" class="nav-link" data-scroll-target="#カタラン数のリスト作成"><strong>カタラン数のリスト作成</strong></a></li>
+  <li><a href="#うどんの配列作成soi_seq関数" id="toc-うどんの配列作成soi_seq関数" class="nav-link" data-scroll-target="#うどんの配列作成soi_seq関数"><strong>うどんの配列作成（soi_seq関数）</strong></a></li>
+  <li><a href="#soi_seqの逆関数" id="toc-soi_seqの逆関数" class="nav-link" data-scroll-target="#soi_seqの逆関数"><strong>soi_seqの逆関数</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#大澤裕一さんとの交流" id="toc-大澤裕一さんとの交流" class="nav-link" data-scroll-target="#大澤裕一さんとの交流">大澤裕一さんとの交流</a>
+  <ul class="collapse">
+  <li><a href="#xへの投稿" id="toc-xへの投稿" class="nav-link" data-scroll-target="#xへの投稿">Xへの投稿</a></li>
+  <li><a href="#juliaのコード" id="toc-juliaのコード" class="nav-link" data-scroll-target="#juliaのコード">Juliaのコード</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">高校数学とJulia</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>清水　団　Dan Shimizu (<a href="https://twitter.com/dannchu"><span class="citation" data-cites="dannchu">@dannchu</span></a>) </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 31, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="はじめに" class="level1">
+<h1>はじめに</h1>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/shimizu.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<section id="最近の取り組み" class="level2">
+<h2 class="anchored" data-anchor-id="最近の取り組み">最近の取り組み</h2>
+<p><strong>「数学を考えるときにJulia言語を使うととてもいい感じ！」</strong>をキャッチフレーズに，主にXなどで発信・情報交換をしています。今日はその中から4つ紹介します。</p>
+<ul>
+<li><strong>鈴木伸介さんとの交流</strong></li>
+<li><strong>合法うどん決定トーナメント</strong></li>
+<li><strong>大澤裕一さんとの交流</strong></li>
+<li><strong>Zenn Booksの紹介</strong></li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="鈴木伸介さんとの交流" class="level1">
+<h1>鈴木伸介さんとの交流</h1>
+<p>X上で鈴木伸介さん<a href="@suzzukes">(<span class="citation" data-cites="suzzukes">@suzzukes</span>)</a>が土日に数学の問題を出してくれます。なんとなく，julia言語使って解くことが習慣になってしまいました。いくつかやりとりを紹介します。</p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/suzuki.png" class="img-fluid"></p>
+<p>書籍など <a href="https://amazon.co.jp/dp/4426129753/">https://amazon.co.jp/dp/4426129753/</a></p>
+<div style="page-break-after: always;"></div>
+<section id="年4月28日" class="level2">
+<h2 class="anchored" data-anchor-id="年4月28日">2024年4月28日</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/428m.png" class="img-fluid"></p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/428.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<div id="75956287" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/4/28</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> x <span class="op">&lt;</span> <span class="fl">1000</span> <span class="co">#まあ1000くらいまでで大丈夫かな。</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        k <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="op">=</span> x<span class="op">:</span>x<span class="op">+</span><span class="fl">10</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> j <span class="op">|&gt;</span> iseven </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                k <span class="op">+=</span> j</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span> k <span class="op">-=</span> j</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">end</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k <span class="op">==</span> <span class="fl">19</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">println</span>(<span class="st">"</span><span class="sc">$</span>(x)<span class="st">〜</span><span class="sc">$</span>(x<span class="op">+</span><span class="fl">10</span>)<span class="st">の11個の自然数。最大の自然数は</span><span class="sc">$</span>(x<span class="op">+</span><span class="fl">10</span>)<span class="st">"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        x <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>14〜24の11個の自然数。最大の自然数は24</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="年7月7日" class="level2">
+<h2 class="anchored" data-anchor-id="年7月7日">2024年7月7日</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/707m.png" class="img-fluid"></p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/707.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<div id="2292486a" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/7/7</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lcm</span>(<span class="fl">21</span>,<span class="fl">15</span>)<span class="op">//</span><span class="fu">gcd</span>(<span class="fl">104</span>,<span class="fl">182</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="132">
+<pre><code>105//26</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="年8月4日" class="level2">
+<h2 class="anchored" data-anchor-id="年8月4日">2024年8月4日</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/804m.png" class="img-fluid"></p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/804.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<div id="75f4262d" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/8/4</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#みかん1個✕円、りんご1個y円</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Aさんの所持金は30x＝18y 円</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#りんごをn個買うと、みかんは24-n個</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 30x=（24-n） x+n30x/18</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#n + (24-n) *30/18 -30 =0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimplePolynomials</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="fu">getx</span>()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="fu">roots</span>(n<span class="op">*</span><span class="fl">30</span><span class="op">/</span><span class="fl">18</span><span class="fu">+</span>(<span class="fl">24</span><span class="op">-</span>n)<span class="op">-</span><span class="fl">30</span>)[<span class="fl">1</span>] <span class="op">|&gt;</span> <span class="dt">Int64</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"りんごは</span><span class="sc">$</span>(N)<span class="st">個"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>りんごは9個</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="年8月17日" class="level2">
+<h2 class="anchored" data-anchor-id="年8月17日">2024年8月17日</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/817m.png" class="img-fluid"></p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/817.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<div id="4a6db56d" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2024/8/17</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     [(x,y) for x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">33</span> , y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">14</span> if <span class="fl">3</span>x<span class="op">+</span><span class="fl">7</span>y <span class="op">==</span> <span class="fl">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="134">
+<pre><code>5-element Vector{Tuple{Int64, Int64}}:
+ (31, 1)
+ (24, 4)
+ (17, 7)
+ (10, 10)
+ (3, 13)</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="合法うどん決定トーナメント" class="level1">
+<h1>合法うどん決定トーナメント</h1>
+<p>「合法うどん決定トーナメント」とは数学コミュニティー「数学デー」の中で話題となり，2024/8/1にポストされました。</p>
+<p><a href="https://x.com/sugaku_day/status/1818672471383720013">https://x.com/sugaku_day/status/1818672471383720013</a></p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/1.jpeg" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<section id="n3-のとき2通りですね" class="level2">
+<h2 class="anchored" data-anchor-id="n3-のとき2通りですね">n=3 のとき，2通りですね。</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/n3.jpg" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="n4-のとき5通りですね" class="level2">
+<h2 class="anchored" data-anchor-id="n4-のとき5通りですね">n=4 のとき，5通りですね。</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/n4.jpg" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="n5-のとき14通りですね" class="level2">
+<h2 class="anchored" data-anchor-id="n5-のとき14通りですね">n=5 のとき，14通りですね。</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/n5.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="n6-のとき42通りですね" class="level2">
+<h2 class="anchored" data-anchor-id="n6-のとき42通りですね">n=6 のとき，42通りですね。</h2>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/n6.png" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="カタラン数との対応" class="level2">
+<h2 class="anchored" data-anchor-id="カタラン数との対応">カタラン数との対応</h2>
+<ul>
+<li>数の並びは<span class="math inline">\(1,1,2,5,14,42,...\)</span>となり，これはカタラン数ですね，</li>
+<li><a href="https://x.com/aoki_taichi"><span class="citation" data-cites="aoki_taichi">@aoki_taichi</span></a>さんのXへの投稿を参考にしました。</li>
+<li><a href="https://x.com/aoki_taichi/status/1819035623648587968">https://x.com/aoki_taichi/status/1819035623648587968</a></li>
+</ul>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/k.jpg" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="julia-のコード" class="level2">
+<h2 class="anchored" data-anchor-id="julia-のコード">Julia のコード</h2>
+<ul>
+<li>カタラン数のリストからうどんの配置パターンを作成</li>
+<li>逆に配置パターンからカタラン数のリストを決定する</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<section id="soi関数" class="level3">
+<h3 class="anchored" data-anchor-id="soi関数"><strong>soi関数</strong></h3>
+<ul>
+<li>うどんを合成する関数です。</li>
+</ul>
+<div id="da117420" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#soi関数</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">soi</span>(A<span class="op">::</span><span class="dt">Vector</span>,B<span class="op">::</span><span class="dt">Vector</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> B</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> <span class="fu">length</span>(A)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span>l</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pushfirst!</span>(X,A[i])</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    X</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#soi関数の例</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">soi</span>([<span class="fl">1</span>],[<span class="fl">2</span>])</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">soi</span>([<span class="fl">1</span>],[<span class="fl">2</span>,<span class="fl">3</span>])</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">soi</span>([<span class="fl">1</span>,<span class="fl">2</span>],[<span class="fl">3</span>])</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">soi</span>([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>],[<span class="fl">4</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>soi([1], [2]) = [1, 2]
+soi([1], [2, 3]) = [1, 2, 3]
+soi([1, 2], [3]) = [2, 1, 3]
+soi([1, 2, 3], [4]) = [3, 2, 1, 4]</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="カタラン数のリストチェック" class="level3">
+<h3 class="anchored" data-anchor-id="カタラン数のリストチェック"><strong>カタラン数のリストチェック</strong></h3>
+<ul>
+<li>1と2が同数あるリストを用いて，左端からどの番まででも（1の個数）≧（2の個数）となっているかチェックします。</li>
+</ul>
+<div id="c9ef36b6" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#左端からどの番まででも（1の個数）≧（2の個数）となっているかチェック</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">catalan_check</span>(sequence<span class="op">::</span><span class="dt">Vector{Int}</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    count1 <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    count2 <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> sequence</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="fl">1</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>            count1 <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elseif</span> i <span class="op">==</span> <span class="fl">2</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            count2 <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> count2 <span class="op">&gt;</span> count1</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="cn">false</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">true</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#チェック例</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">catalan_check</span>([<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>])</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">catalan_check</span>([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>])</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">catalan_check</span>([<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>])</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">catalan_check</span>([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>catalan_check([1, 1, 1, 1, 2, 2, 2, 2]) = true
+catalan_check([1, 2, 1, 1, 2, 1, 2, 2]) = true
+catalan_check([2, 2, 2, 2, 1, 1, 1, 1]) = false
+catalan_check([1, 2, 2, 1, 2, 1, 1, 2]) = false</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="カタラン数のリスト作成" class="level3">
+<h3 class="anchored" data-anchor-id="カタラン数のリスト作成"><strong>カタラン数のリスト作成</strong></h3>
+<ul>
+<li>1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック</li>
+<li>総数はカタラン数C(n+1)である</li>
+<li><code>Combinatorics.jl</code>を利用します。</li>
+</ul>
+<div id="435a3509" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Combinatorics</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1がn個，2がn個を一列に並べたリストを（1の個数）≧（2の個数）でチェック</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#総数はカタラン数C(n+1)である</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">catalan_list</span>(n)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> [i for i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">*</span>n]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    Z <span class="op">=</span> []</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>  x <span class="kw">in</span> <span class="fu">combinations</span>(X,n)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> <span class="fu">ones</span>(<span class="dt">Int64</span>,<span class="fl">2</span><span class="op">*</span>n)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> x</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>            Y[i] <span class="op">=</span> <span class="fl">2</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">push!</span>(Z,Y)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(catalan_check, Z)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#n=4の時のカタラン数のリスト</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">catalan_list</span>(<span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="137">
+<pre><code>14-element Vector{Any}:
+ [1, 2, 1, 2, 1, 2, 1, 2]
+ [1, 2, 1, 2, 1, 1, 2, 2]
+ [1, 2, 1, 1, 2, 2, 1, 2]
+ [1, 2, 1, 1, 2, 1, 2, 2]
+ [1, 2, 1, 1, 1, 2, 2, 2]
+ [1, 1, 2, 2, 1, 2, 1, 2]
+ [1, 1, 2, 2, 1, 1, 2, 2]
+ [1, 1, 2, 1, 2, 2, 1, 2]
+ [1, 1, 2, 1, 2, 1, 2, 2]
+ [1, 1, 2, 1, 1, 2, 2, 2]
+ [1, 1, 1, 2, 2, 2, 1, 2]
+ [1, 1, 1, 2, 2, 1, 2, 2]
+ [1, 1, 1, 2, 1, 2, 2, 2]
+ [1, 1, 1, 1, 2, 2, 2, 2]</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="うどんの配列作成soi_seq関数" class="level3">
+<h3 class="anchored" data-anchor-id="うどんの配列作成soi_seq関数"><strong>うどんの配列作成（soi_seq関数）</strong></h3>
+<ul>
+<li>カタラン数のリストからsoi関数で変換します。</li>
+</ul>
+<div id="b3b18d40" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#カタラン数のリストからsoi関数で変換</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">soi_seq</span>(X<span class="op">::</span><span class="dt">Vector</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> <span class="fu">length</span>(X)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> l<span class="op">//</span><span class="fl">2</span> <span class="op">+</span><span class="fl">1</span><span class="op">|&gt;</span> <span class="dt">Int64</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> [[i] for i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span>m]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    count1 <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    count2 <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> l <span class="op">&gt;</span><span class="fl">0</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> X[l] <span class="op">==</span> <span class="fl">1</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>            A <span class="op">=</span> <span class="fu">soi</span>(P[m<span class="op">-</span>count2],P[m<span class="op">-</span>count2<span class="op">+</span><span class="fl">1</span>])</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">deleteat!</span>(P, m<span class="op">-</span>count2)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">deleteat!</span>(P, m<span class="op">-</span>count2)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">insert!</span>(P,  m<span class="op">-</span>count2,A)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>            count1 <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elseif</span> X[l] <span class="op">==</span> <span class="fl">2</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>            count2 <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        l <span class="op">-=</span> <span class="fl">1</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=&gt;</span> P[<span class="fl">1</span>]</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#n=4でチェック</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i  <span class="op">∈</span> <span class="fu">catalan_list</span>(<span class="fl">4</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@show</span> <span class="fu">soi_seq</span>(i)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>soi_seq(i) = [1, 2, 1, 2, 1, 2, 1, 2] =&gt; [1, 2, 3, 4, 5]
+soi_seq(i) = [1, 2, 1, 2, 1, 1, 2, 2] =&gt; [1, 2, 4, 3, 5]
+soi_seq(i) = [1, 2, 1, 1, 2, 2, 1, 2] =&gt; [1, 3, 2, 4, 5]
+soi_seq(i) = [1, 2, 1, 1, 2, 1, 2, 2] =&gt; [1, 4, 3, 2, 5]
+soi_seq(i) = [1, 2, 1, 1, 1, 2, 2, 2] =&gt; [1, 4, 2, 3, 5]
+soi_seq(i) = [1, 1, 2, 2, 1, 2, 1, 2] =&gt; [2, 1, 3, 4, 5]
+soi_seq(i) = [1, 1, 2, 2, 1, 1, 2, 2] =&gt; [2, 1, 4, 3, 5]
+soi_seq(i) = [1, 1, 2, 1, 2, 2, 1, 2] =&gt; [3, 2, 1, 4, 5]
+soi_seq(i) = [1, 1, 2, 1, 2, 1, 2, 2] =&gt; [4, 3, 2, 1, 5]
+soi_seq(i) = [1, 1, 2, 1, 1, 2, 2, 2] =&gt; [4, 2, 3, 1, 5]
+soi_seq(i) = [1, 1, 1, 2, 2, 2, 1, 2] =&gt; [3, 1, 2, 4, 5]
+soi_seq(i) = [1, 1, 1, 2, 2, 1, 2, 2] =&gt; [4, 3, 1, 2, 5]
+soi_seq(i) = [1, 1, 1, 2, 1, 2, 2, 2] =&gt; [4, 1, 2, 3, 5]
+soi_seq(i) = [1, 1, 1, 1, 2, 2, 2, 2] =&gt; [4, 2, 1, 3, 5]</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="soi_seqの逆関数" class="level3">
+<h3 class="anchored" data-anchor-id="soi_seqの逆関数"><strong>soi_seqの逆関数</strong></h3>
+<ul>
+<li>結局，アルゴリズムはよくわからなかったです。</li>
+<li>関数は１対１だったので，ペアのリストを作ってチェックしました。</li>
+<li>１対1は明らかではなかったのですが，一応確認は取れています。</li>
+</ul>
+<div id="604b269e" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># soi_seqの逆変換を行う関数</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">inverse_soi_seq</span>(sequence<span class="op">::</span><span class="dt">Vector</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="fu">length</span>(sequence) <span class="op">-</span><span class="fl">1</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># カタラン数リストを生成</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    catalan_seqs <span class="op">=</span> <span class="fu">catalan_list</span>(n)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 与えられたシーケンスがカタラン数リストに対応するかチェック</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> catalan_seqs</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        _, transformed <span class="op">=</span> <span class="fu">soi_seq</span>(seq)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> transformed <span class="op">==</span> sequence</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> seq</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"対応するカタラン数のリストはない"</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#逆変換の例</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">inverse_soi_seq</span>([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>])</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">inverse_soi_seq</span>([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">5</span>])</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">inverse_soi_seq</span>([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">5</span>])</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">inverse_soi_seq</span>([<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>inverse_soi_seq([1, 2, 4, 3, 5, 6]) = [1, 2, 1, 2, 1, 1, 2, 2, 1, 2]
+inverse_soi_seq([1, 2, 4, 3, 6, 5]) = "対応するカタラン数のリストはない"
+inverse_soi_seq([1, 2, 3, 4, 6, 5]) = "対応するカタラン数のリストはない"
+inverse_soi_seq([2, 1, 3, 4, 5, 6]) = [1, 1, 2, 2, 1, 2, 1, 2, 1, 2]</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+</section>
+<section id="大澤裕一さんとの交流" class="level1">
+<h1>大澤裕一さんとの交流</h1>
+<p>大澤裕一さん<a href="https://x.com/HirokazuOHSAWA">(<span class="citation" data-cites="HirokazuOHSAWA">@HirokazuOHSAWA</span>)</a>とは数学の話題についてXで交流があります。現在の高校生は数学Bで「統計的な推測」を学習します。以前と異なる点は「今年の高校3年生が受ける共通テストで多くの生徒が統計的な推測を選択する。」ということです。後4年経つと，多くの統計リテラシーを持つ方々が社会に出てくるのではないでしょうか。（統計教えて欲しいです。。。）今回は，大澤裕一さんからの問題を少し発展させて考えた経過をご紹介します。</p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/ohsawa.png" class="img-fluid"></p>
+<p><img src="https://shimizudan.github.io/20240831juliatokyo/m1.png" class="img-fluid"></p>
+<section id="xへの投稿" class="level2">
+<h2 class="anchored" data-anchor-id="xへの投稿">Xへの投稿</h2>
+<p>この問題の期待値を求め，さらに，「分散ももとまるかな？」と思って，まずは理論的に求めました。そして，「juliaで実験してみよう！」と思って，実験しました。</p>
+<blockquote class="blockquote">
+<ul>
+<li><a href="https://x.com/dannchu/status/1821527374678389006">https://x.com/dannchu/status/1821527374678389006</a></li>
+<li><a href="https://x.com/dannchu/status/1821692900322975852">https://x.com/dannchu/status/1821692900322975852</a></li>
+</ul>
+</blockquote>
+<p>…しかし，Juliaで計算結果と，理論的に求めたものが一致しません。個数を増やしてみたのですが，やはり違っているようでした。この後しばらく考えることになります。（8/9~8/13）</p>
+</section>
+<section id="juliaのコード" class="level2">
+<h2 class="anchored" data-anchor-id="juliaのコード">Juliaのコード</h2>
+<p>ようやく，理論値が間違っていることがわかり修正できました。</p>
+<blockquote class="blockquote">
+<ul>
+<li>Xへの投稿 <a href="https://x.com/dannchu/status/1823368586834116880">https://x.com/dannchu/status/1823368586834116880</a></li>
+<li>まとめ　<a href="https://github.com/shimizudan/20240808stat">https://github.com/shimizudan/20240808stat</a></li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<p><embed src="https://shimizudan.github.io/20240808stat/8080.pdf" class="img-fluid"></p>
+</blockquote>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
